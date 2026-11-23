@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="InspecciónPWA">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Inspección Visual PWA</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header>
+    <h1>Inspección Visual</h1>
+    <button id="btn-instalar" type="button" hidden>Instalar App</button>
+  </header>
+
+  <main>
+    <!-- iOS-only install instructions (Safari never fires beforeinstallprompt) -->
+    <section id="aviso-ios" class="card aviso" hidden>
+      <strong>Instala esta app en tu iPhone</strong>
+      <ol>
+        <li>Toca el botón <b>Compartir</b> (cuadro con flecha hacia arriba) en Safari.</li>
+        <li>Elige <b>Agregar a inicio</b>.</li>
+        <li>Toca <b>Agregar</b>.</li>
+      </ol>
+      <button id="btn-cerrar-ios" type="button" class="secundario">Entendido</button>
+    </section>
+
+    <section class="card">
+      <h2>Cámara</h2>
+      <p id="estado" class="estado" role="status">Cámara apagada.</p>
+
+      <div class="visor">
+        <video id="visor-camara" autoplay playsinline muted></video>
+      </div>
+
+      <div class="botones">
+        <button id="btn-preparar-camara" type="button">Solicitar Acceso a Cámara</button>
+        <button id="btn-alternar-camara" type="button" class="secundario" disabled>Cambiar Cámara</button>
+        <button id="btn-apagar-camara" type="button" class="peligro" disabled>Apagar Cámara</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pre-permission ethical notice: shown BEFORE getUserMedia -->
+  <div id="aviso-permiso" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="titulo-permiso">
+    <div class="modal-caja">
+      <h2 id="titulo-permiso">¿Permitir uso de cámara?</h2>
+      <p>Esta aplicación requiere acceso a tu cámara <b>únicamente para mostrar una vista previa local en pantalla</b>.</p>
+      <p>Se encenderá la cámara <b id="aviso-lente">trasera</b>. Ninguna imagen se envía a servidores externos: el video se procesa solo en tu dispositivo.</p>
+      <p class="nota">Después tu navegador te pedirá confirmación. Si bloqueas el permiso, tendrás que habilitarlo manualmente en los ajustes.</p>
+      <div class="botones">
+        <button id="btn-confirmar-permiso" type="button">Aceptar y Encender Cámara</button>
+        <button id="btn-cancelar-permiso" type="button" class="secundario">Ahora no</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
