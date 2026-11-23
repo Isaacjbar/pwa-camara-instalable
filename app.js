@@ -2,8 +2,8 @@
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js')
-      .then((reg) => console.log('[SW] Registrado, scope:', reg.scope))
-      .catch((err) => console.error('[SW] Falla de registro:', err));
+      .then((reg) => console.log('[SW] Registered, scope:', reg.scope))
+      .catch((err) => console.error('[SW] Registration failed:', err));
   });
 }
 
@@ -63,7 +63,7 @@ const btnApagar = document.getElementById('btn-apagar-camara');
 const avisoPermiso = document.getElementById('aviso-permiso');
 
 function nombreLente(modo) {
-  return modo === 'environment' ? 'Trasera' : 'Frontal';
+  return modo === 'environment' ? 'Rear' : 'Front';
 }
 
 function actualizarMensajeEstado(texto) {
@@ -88,7 +88,7 @@ function iniciarCamara(modo) {
   detenerCamaraActiva();
 
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    actualizarMensajeEstado('Este navegador no soporta acceso a cámara (se requiere HTTPS).');
+    actualizarMensajeEstado('This browser does not support camera access (HTTPS is required).');
     return Promise.resolve();
   }
 
@@ -105,7 +105,7 @@ function iniciarCamara(modo) {
       return visorVideo.play().catch(() => {});
     })
     .then(() => {
-      actualizarMensajeEstado('Cámara activa (' + nombreLente(modo) + ')');
+      actualizarMensajeEstado('Camera active (' + nombreLente(modo) + ')');
       actualizarBotones(true);
     })
     .catch((error) => {
@@ -114,13 +114,13 @@ function iniciarCamara(modo) {
       actualizarBotones(false);
 
       if (error.name === 'NotAllowedError') {
-        actualizarMensajeEstado('Permiso denegado. Habilita el acceso a la cámara en los ajustes de tu navegador.');
+        actualizarMensajeEstado('Permission denied. Enable camera access in your browser settings.');
       } else if (error.name === 'NotReadableError') {
-        actualizarMensajeEstado('La cámara está ocupada o bloqueada por el sistema. Apágala e inténtalo de nuevo.');
+        actualizarMensajeEstado('The camera is busy or blocked by the system. Turn it off and try again.');
       } else if (error.name === 'NotFoundError' || error.name === 'OverconstrainedError') {
-        actualizarMensajeEstado('No se detectó el sensor de cámara solicitado en este dispositivo.');
+        actualizarMensajeEstado('The requested camera sensor was not found on this device.');
       } else {
-        actualizarMensajeEstado('Error al acceder al hardware: ' + error.message);
+        actualizarMensajeEstado('Error accessing the hardware: ' + error.message);
       }
     });
 }
@@ -139,7 +139,7 @@ document.getElementById('btn-confirmar-permiso').addEventListener('click', () =>
 
 document.getElementById('btn-cancelar-permiso').addEventListener('click', () => {
   avisoPermiso.hidden = true;
-  actualizarMensajeEstado('Cámara apagada. No se solicitó ningún permiso.');
+  actualizarMensajeEstado('Camera is off. No permission was requested.');
 });
 
 // Flip lens: stop tracks first (done inside iniciarCamara)
@@ -152,7 +152,7 @@ btnApagar.addEventListener('click', () => {
   detenerCamaraActiva();
   visorVideo.srcObject = null;
   actualizarBotones(false);
-  actualizarMensajeEstado('Cámara apagada.');
+  actualizarMensajeEstado('Camera is off.');
 });
 
 // Release the sensor if the page is hidden/closed

@@ -1,7 +1,7 @@
 {
-  "name": "Inspección Visual PWA",
-  "short_name": "InspecciónPWA",
-  "description": "Captura de evidencia fotográfica con acceso consciente a cámara.",
+  "name": "Visual Inspection PWA",
+  "short_name": "Inspection",
+  "description": "Photo evidence capture with conscious camera access.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

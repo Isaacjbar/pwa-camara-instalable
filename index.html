@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0f172a">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="InspecciónPWA">
+  <meta name="apple-mobile-web-app-title" content="Visual Inspection">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Inspección Visual PWA</title>
+  <title>Visual Inspection PWA</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
@@ -16,34 +16,34 @@
 </head>
 <body>
   <header>
-    <h1>Inspección Visual</h1>
-    <button id="btn-instalar" type="button" hidden>Instalar App</button>
+    <h1>Visual Inspection</h1>
+    <button id="btn-instalar" type="button" hidden>Install App</button>
   </header>
 
   <main>
     <!-- iOS-only install instructions (Safari never fires beforeinstallprompt) -->
     <section id="instrucciones-ios" class="card aviso" hidden>
-      <strong>Instala esta app en tu iPhone</strong>
+      <strong>Install this app on your iPhone</strong>
       <ol>
-        <li>Pulsa el icono <b>Compartir</b> (cuadro con flecha hacia arriba) en Safari.</li>
-        <li>Selecciona <b>Agregar a inicio</b>.</li>
-        <li>Toca <b>Agregar</b>.</li>
+        <li>Tap the <b>Share</b> icon (square with an arrow pointing up) in Safari.</li>
+        <li>Select <b>Add to Home Screen</b>.</li>
+        <li>Tap <b>Add</b>.</li>
       </ol>
-      <button id="btn-cerrar-ios" type="button" class="secundario">Entendido</button>
+      <button id="btn-cerrar-ios" type="button" class="secundario">Got it</button>
     </section>
 
     <section class="card">
-      <h2>Cámara</h2>
-      <p id="estado" class="estado" role="status">Cámara apagada.</p>
+      <h2>Camera</h2>
+      <p id="estado" class="estado" role="status">Camera is off.</p>
 
       <div class="visor">
         <video id="visor-camara" autoplay playsinline muted></video>
       </div>
 
       <div class="botones">
-        <button id="btn-preparar-camara" type="button">Solicitar Acceso a Cámara</button>
-        <button id="btn-alternar-camara" type="button" class="secundario" disabled>Cambiar Cámara</button>
-        <button id="btn-apagar-camara" type="button" class="peligro" disabled>Apagar Cámara</button>
+        <button id="btn-preparar-camara" type="button">Request Camera Access</button>
+        <button id="btn-alternar-camara" type="button" class="secundario" disabled>Switch Camera</button>
+        <button id="btn-apagar-camara" type="button" class="peligro" disabled>Turn Camera Off</button>
       </div>
     </section>
   </main>
@@ -51,13 +51,13 @@
   <!-- Pre-permission ethical notice: shown BEFORE getUserMedia -->
   <div id="aviso-permiso" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="titulo-permiso">
     <div class="modal-caja">
-      <h2 id="titulo-permiso">¿Permitir uso de cámara?</h2>
-      <p>Esta aplicación requiere acceso a tu cámara <b>únicamente para mostrar una vista previa local en pantalla</b>.</p>
-      <p>Se encenderá la cámara <b id="aviso-lente">trasera</b>. Ninguna imagen se envía a servidores externos: el video se procesa solo en tu dispositivo.</p>
-      <p class="nota">Después tu navegador te pedirá confirmación. Si bloqueas el permiso, tendrás que habilitarlo manualmente en los ajustes.</p>
+      <h2 id="titulo-permiso">Allow camera use?</h2>
+      <p>This app needs access to your camera <b>only to show a local preview on screen</b>.</p>
+      <p>The <b id="aviso-lente">rear</b> camera will be turned on. No image is sent to external servers: the video stays on your device.</p>
+      <p class="nota">Your browser will then ask for confirmation. If you block the permission, you will have to enable it manually in your settings.</p>
       <div class="botones">
-        <button id="btn-confirmar-permiso" type="button">Aceptar y Encender Cámara</button>
-        <button id="btn-cancelar-permiso" type="button" class="secundario">Ahora no</button>
+        <button id="btn-confirmar-permiso" type="button">Accept and Turn Camera On</button>
+        <button id="btn-cancelar-permiso" type="button" class="secundario">Not now</button>
       </div>
     </div>
   </div>
