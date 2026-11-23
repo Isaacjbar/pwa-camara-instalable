@@ -21,3 +21,4 @@ button:disabled { opacity: .4; cursor: not-allowed; }
 .modal-caja { background: #1e293b; border-radius: 16px; padding: 1.25rem; max-width: 420px; width: 100%; }
 .modal-caja h2 { margin-top: 0; }
 .nota { font-size: .8rem; color: #94a3b8; }
+.autor { margin: .15rem 0 0; font-size: .75rem; color: #94a3b8; }

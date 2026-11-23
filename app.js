@@ -94,7 +94,7 @@ function iniciarCamara(modo) {
 
   const restricciones = {
     video: { facingMode: { ideal: modo } },
-    audio: false
+    audio: false  
   };
 
   return navigator.mediaDevices.getUserMedia(restricciones)
