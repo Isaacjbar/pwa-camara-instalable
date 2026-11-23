@@ -1,4 +1,4 @@
-const CACHE_NAME = 'camara-instalable-v1';
+const CACHE_NAME = 'camara-instalable-v2';
 const PRECACHE = [
   './',
   './index.html',

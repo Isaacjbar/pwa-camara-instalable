@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#0f172a">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="InspecciÃ³nPWA">
+  <meta name="apple-mobile-web-app-title" content="InspecciónPWA">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>InspecciÃ³n Visual PWA</title>
+  <title>Inspección Visual PWA</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
@@ -16,7 +16,7 @@
 </head>
 <body>
   <header>
-    <h1>InspecciÃ³n Visual</h1>
+    <h1>Inspección Visual</h1>
     <button id="btn-instalar" type="button" hidden>Instalar App</button>
   </header>
 
@@ -25,7 +25,7 @@
     <section id="instrucciones-ios" class="card aviso" hidden>
       <strong>Instala esta app en tu iPhone</strong>
       <ol>
-        <li>Toca el botÃ³n <b>Compartir</b> (cuadro con flecha hacia arriba) en Safari.</li>
+        <li>Pulsa el icono <b>Compartir</b> (cuadro con flecha hacia arriba) en Safari.</li>
         <li>Selecciona <b>Agregar a inicio</b>.</li>
         <li>Toca <b>Agregar</b>.</li>
       </ol>
@@ -33,17 +33,17 @@
     </section>
 
     <section class="card">
-      <h2>CÃ¡mara</h2>
-      <p id="estado" class="estado" role="status">CÃ¡mara apagada.</p>
+      <h2>Cámara</h2>
+      <p id="estado" class="estado" role="status">Cámara apagada.</p>
 
       <div class="visor">
         <video id="visor-camara" autoplay playsinline muted></video>
       </div>
 
       <div class="botones">
-        <button id="btn-preparar-camara" type="button">Solicitar Acceso a CÃ¡mara</button>
-        <button id="btn-alternar-camara" type="button" class="secundario" disabled>Cambiar CÃ¡mara</button>
-        <button id="btn-apagar-camara" type="button" class="peligro" disabled>Apagar CÃ¡mara</button>
+        <button id="btn-preparar-camara" type="button">Solicitar Acceso a Cámara</button>
+        <button id="btn-alternar-camara" type="button" class="secundario" disabled>Cambiar Cámara</button>
+        <button id="btn-apagar-camara" type="button" class="peligro" disabled>Apagar Cámara</button>
       </div>
     </section>
   </main>
@@ -51,12 +51,12 @@
   <!-- Pre-permission ethical notice: shown BEFORE getUserMedia -->
   <div id="aviso-permiso" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="titulo-permiso">
     <div class="modal-caja">
-      <h2 id="titulo-permiso">Â¿Permitir uso de cÃ¡mara?</h2>
-      <p>Esta aplicaciÃ³n requiere acceso a tu cÃ¡mara <b>Ãºnicamente para mostrar una vista previa local en pantalla</b>.</p>
-      <p>Se encenderÃ¡ la cÃ¡mara <b id="aviso-lente">trasera</b>. Ninguna imagen se envÃ­a a servidores externos: el video se procesa solo en tu dispositivo.</p>
-      <p class="nota">DespuÃ©s tu navegador te pedirÃ¡ confirmaciÃ³n. Si bloqueas el permiso, tendrÃ¡s que habilitarlo manualmente en los ajustes.</p>
+      <h2 id="titulo-permiso">¿Permitir uso de cámara?</h2>
+      <p>Esta aplicación requiere acceso a tu cámara <b>únicamente para mostrar una vista previa local en pantalla</b>.</p>
+      <p>Se encenderá la cámara <b id="aviso-lente">trasera</b>. Ninguna imagen se envía a servidores externos: el video se procesa solo en tu dispositivo.</p>
+      <p class="nota">Después tu navegador te pedirá confirmación. Si bloqueas el permiso, tendrás que habilitarlo manualmente en los ajustes.</p>
       <div class="botones">
-        <button id="btn-confirmar-permiso" type="button">Aceptar y Encender CÃ¡mara</button>
+        <button id="btn-confirmar-permiso" type="button">Aceptar y Encender Cámara</button>
         <button id="btn-cancelar-permiso" type="button" class="secundario">Ahora no</button>
       </div>
     </div>
@@ -65,4 +65,3 @@
   <script src="./app.js"></script>
 </body>
 </html>
-
