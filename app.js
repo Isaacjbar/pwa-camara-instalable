@@ -1,4 +1,4 @@
-// ---------- Service Worker ----------
+﻿// ---------- Service Worker ----------
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js')
@@ -10,19 +10,18 @@ if ('serviceWorker' in navigator) {
 // ---------- Installability ----------
 let eventoInstalacionDiferido = null;
 const btnInstalar = document.getElementById('btn-instalar');
-const avisoIOS = document.getElementById('aviso-ios');
+const avisoIOS = document.getElementById('instrucciones-ios');
 
-function esIOS() {
-  const ua = window.navigator.userAgent;
-  // iPadOS 13+ reports as Macintosh with touch points
-  return /iphone|ipad|ipod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+function verificarEntornoIOS() {
+  const esIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const estaInstalada = window.navigator.standalone === true ||
+                        window.matchMedia('(display-mode: standalone)').matches;
+
+  // iPhone still in the browser: show manual install instructions
+  if (esIOS && !estaInstalada) {
+    avisoIOS.hidden = false;
+  }
 }
-
-function estaInstalada() {
-  return window.navigator.standalone === true ||
-    window.matchMedia('(display-mode: standalone)').matches;
-}
-
 // Android / Chrome
 window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();
@@ -47,9 +46,7 @@ window.addEventListener('appinstalled', () => {
 });
 
 // iOS / Safari: no beforeinstallprompt, show manual instructions
-if (esIOS() && !estaInstalada()) {
-  avisoIOS.hidden = false;
-}
+verificarEntornoIOS();
 document.getElementById('btn-cerrar-ios').addEventListener('click', () => {
   avisoIOS.hidden = true;
 });
@@ -90,7 +87,7 @@ function iniciarCamara(modo) {
   detenerCamaraActiva();
 
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    actualizarMensajeEstado('Este navegador no soporta acceso a cámara (se requiere HTTPS).');
+    actualizarMensajeEstado('Este navegador no soporta acceso a cÃ¡mara (se requiere HTTPS).');
     return Promise.resolve();
   }
 
@@ -107,7 +104,7 @@ function iniciarCamara(modo) {
       return visorVideo.play().catch(() => {});
     })
     .then(() => {
-      actualizarMensajeEstado('Cámara activa (' + nombreLente(modo) + ')');
+      actualizarMensajeEstado('CÃ¡mara activa (' + nombreLente(modo) + ')');
       actualizarBotones(true);
     })
     .catch((error) => {
@@ -116,9 +113,11 @@ function iniciarCamara(modo) {
       actualizarBotones(false);
 
       if (error.name === 'NotAllowedError') {
-        actualizarMensajeEstado('Permiso denegado. Habilita el acceso a la cámara en los ajustes de tu navegador.');
+        actualizarMensajeEstado('Permiso denegado. Habilita el acceso a la cÃ¡mara en los ajustes de tu navegador.');
+      } else if (error.name === 'NotReadableError') {
+        actualizarMensajeEstado('La cámara está ocupada o bloqueada por el sistema. Apágala e inténtalo de nuevo.');
       } else if (error.name === 'NotFoundError' || error.name === 'OverconstrainedError') {
-        actualizarMensajeEstado('No se detectó el sensor de cámara solicitado en este dispositivo.');
+        actualizarMensajeEstado('No se detectÃ³ el sensor de cÃ¡mara solicitado en este dispositivo.');
       } else {
         actualizarMensajeEstado('Error al acceder al hardware: ' + error.message);
       }
@@ -139,7 +138,7 @@ document.getElementById('btn-confirmar-permiso').addEventListener('click', () =>
 
 document.getElementById('btn-cancelar-permiso').addEventListener('click', () => {
   avisoPermiso.hidden = true;
-  actualizarMensajeEstado('Cámara apagada. No se solicitó ningún permiso.');
+  actualizarMensajeEstado('CÃ¡mara apagada. No se solicitÃ³ ningÃºn permiso.');
 });
 
 // Flip lens: stop tracks first (done inside iniciarCamara)
@@ -152,8 +151,9 @@ btnApagar.addEventListener('click', () => {
   detenerCamaraActiva();
   visorVideo.srcObject = null;
   actualizarBotones(false);
-  actualizarMensajeEstado('Cámara apagada.');
+  actualizarMensajeEstado('CÃ¡mara apagada.');
 });
 
 // Release the sensor if the page is hidden/closed
 window.addEventListener('pagehide', detenerCamaraActiva);
+
